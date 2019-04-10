@@ -45,3 +45,64 @@ while (1)
     ind_N = find(x0 == 0);
 end
 end
+
+
+a=[1 2 1 0 0;4 0 0 1 0;0 4 0 0 1];
+b0=[8;16;12];
+c=[2 3 0 0 0];
+x=[1 2 3 4 5;1 1 1 1 1];
+[m,n]=size(a);
+e=eye(3);
+B=e;
+xb=zeros(m,1);
+xn=[];
+cn=[];
+cb=zeros(1,m);
+xin=0;xout=0;
+for j=1:m
+    for i=1:n
+        if a(:,i)==e(:,j)
+            xb(j)=i;
+            x(2,i)=0;
+            cb(j)=c(i);
+        end
+    end
+end
+for i=1:n
+    if x(2,i)==1
+        xn=[xn;x(1,i)]
+        cn=[cn,c(i)];
+    end
+end
+b=b0;
+jianyan=c;
+jianyanmax=max(jianyan);
+kk=1;
+while(jianyanmax>0)
+    in=find(jianyan==jianyanmax);
+    xin=in;
+P=B*a(:,in);
+    xita=[1000;1000;1000];
+    
+    for i=1:m
+        if P(i)>0
+        xita(i)=b(i)/P(i);
+        end
+    end
+    [minxita,out]=min(xita);
+    xout=xb(out);
+    xb(out)=xin;
+    cb(out)=c(xin);
+    weizhi=find(xn==xin);
+    xn(weizhi)=xout;
+    cn(weizhi)=c(xout);
+    EE=e;
+    EE(:,out)=P;
+      E=inv(EE);
+      B=E*B;
+      bb=b0;
+      b=B*bb;
+      jianyan=c-cb*B*a;
+      jianyanmax=max(jianyan);
+      kk=kk+1;
+End
