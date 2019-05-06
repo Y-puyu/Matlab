@@ -12,7 +12,7 @@ while (1)
     c_N = c(ind_N);
 
     s = c_N - N' * inv(B)' * c_B; 
-    %'
+    %
     if isempty(find(sign(s) > 0))
         % found optimal solution
         x = x0;
@@ -46,7 +46,7 @@ while (1)
 end
 end
 
-
+// 20190506
 a=[1 2 1 0 0;4 0 0 1 0;0 4 0 0 1];
 b0=[8;16;12];
 c=[2 3 0 0 0];
